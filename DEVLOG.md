@@ -36,3 +36,16 @@
 **Blockers / what I'm stuck on:** The `generateMetadata` export in the results page conflicts with the `'use client'` directive. Solution: split into a Server Component (`page.tsx`) that handles `generateMetadata` and data fetching, plus a Client Component (`AuditResultsClient.tsx`) that handles all interactivity (share button, lead form).
 
 **Plan for tomorrow:** Complete the results page client component, lead capture API route, and Resend email integration.
+
+---
+
+## Day 4 — 2026-05-22
+**Hours worked:** 5
+
+**What I did:** Finished `AuditResultsClient.tsx` with the share button, toast notification, and lead capture form. Built `app/api/leads/route.ts` with honeypot detection and Resend integration. The email template took longer than expected — HTML email clients are a nightmare. Used inline styles throughout and tested in Gmail via Resend's test mode. Also completed `app/page.tsx` with all 8 tools, dynamic seat/flat-plan logic, and localStorage persistence.
+
+**What I learned:** The Resend sandbox domain (`@resend.dev`) only delivers to email addresses you've verified in the Resend dashboard. Spent 20 minutes wondering why my test emails weren't arriving before reading the docs. Also learned that `tabIndex={-1}` alone isn't sufficient to hide the honeypot from screen readers — need `aria-hidden="true"` and the off-screen CSS positioning.
+
+**Blockers / what I'm stuck on:** The `website` honeypot field was triggering browser autofill in Chrome (it recognized "website" as a URL field and filled it automatically). Fixed by adding `autoComplete="off"` to the honeypot input.
+
+**Plan for tomorrow:** Shareable URLs, OG tags, dynamic `opengraph-image.tsx`.
