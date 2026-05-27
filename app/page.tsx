@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useId } from 'react'
 import { useRouter } from 'next/navigation'
+import { LogoIcon } from '@/components/LogoIcon'
 import { TOOL_CATALOG } from '@/lib/toolCatalog'
 import type { FormState, ToolFormRow, AuditApiRequest } from '@/lib/types'
 
@@ -338,9 +339,7 @@ export default function HomePage() {
       <header className="relative z-10 border-b border-white/5">
         <div className="max-w-5xl mx-auto px-4 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
-              S
-            </div>
+            <LogoIcon />
             <span className="font-bold text-lg tracking-tight">SpendLens</span>
             <span className="text-xs text-white/30 border border-white/10 rounded-full px-2 py-0.5">by Credex</span>
           </div>
