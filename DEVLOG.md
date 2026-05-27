@@ -49,3 +49,16 @@
 **Blockers / what I'm stuck on:** The `website` honeypot field was triggering browser autofill in Chrome (it recognized "website" as a URL field and filled it automatically). Fixed by adding `autoComplete="off"` to the honeypot input.
 
 **Plan for tomorrow:** Shareable URLs, OG tags, dynamic `opengraph-image.tsx`.
+
+---
+
+## Day 5 — 2026-05-23
+**Hours worked:** 4
+
+**What I did:** Built `app/audit/[id]/opengraph-image.tsx` using the `next/og` `ImageResponse` API. Added `generateMetadata` to the results page with dynamic title and description. Tested OG preview using opengraph.xyz — the dynamic image renders correctly with the savings number. Added a UUID validation regex to prevent SSRF on the ID parameter. Generated the static fallback `public/og-image.png`.
+
+**What I learned:** `next/og` runs on the edge runtime, which means it can't import Node.js-specific modules. The Supabase JS client works fine on edge (it uses `fetch` internally), but had to move the supabase client call out of the `ImageResponse` JSX and into the outer async function. Also: the `size` export from `opengraph-image.tsx` must be `{ width: 1200, height: 630 }` exactly — Next.js ignores other dimensions.
+
+**Blockers / what I'm stuck on:** Nothing major. The edge runtime limitation was unexpected but documented in the Next.js docs once I looked.
+
+**Plan for tomorrow:** Accessibility audit, Lighthouse run, rate limiting, GitHub Actions CI.
