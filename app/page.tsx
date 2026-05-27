@@ -341,7 +341,7 @@ export default function HomePage() {
           <div className="flex items-center gap-3">
             <LogoIcon />
             <span className="font-bold text-lg tracking-tight">SpendLens</span>
-            <span className="text-xs text-white/30 border border-white/10 rounded-full px-2 py-0.5">by Credex</span>
+            <span className="text-xs text-white/50 border border-white/10 rounded-full px-2 py-0.5">by Credex</span>
           </div>
           <a
             href="https://credex.rocks"
@@ -373,7 +373,7 @@ export default function HomePage() {
           <p className="text-xl text-white/50 max-w-xl mx-auto mb-3">
             Free 2-minute audit. No signup. Instant savings report for your team.
           </p>
-          <p className="text-sm text-white/30">
+          <p className="text-sm text-white/50">
             Supports Cursor, GitHub Copilot, Claude, ChatGPT, Gemini, Windsurf & more
           </p>
         </section>
@@ -488,9 +488,9 @@ export default function HomePage() {
                 <p className="text-xs text-white/40 uppercase tracking-widest mb-1">Current Monthly Spend</p>
                 <p className="text-4xl font-extrabold">
                   <span className="gradient-text">${totalMonthlySpend.toLocaleString()}</span>
-                  <span className="text-white/30 text-xl font-normal">/mo</span>
+                  <span className="text-white/50 text-xl font-normal">/mo</span>
                 </p>
-                <p className="text-sm text-white/30 mt-1">
+                <p className="text-sm text-white/50 mt-1">
                   ${(totalMonthlySpend * 12).toLocaleString()}/year across {formState.tools.length} tool{formState.tools.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -517,7 +517,7 @@ export default function HomePage() {
                     'Audit my AI spend →'
                   )}
                 </button>
-                <p className="text-xs text-white/30">
+                <p className="text-xs text-white/50">
                   Free. No signup. Takes ~2 minutes.
                 </p>
               </div>
@@ -593,7 +593,7 @@ export default function HomePage() {
               >
                 <summary className="font-medium text-white/80 select-none list-none flex items-center justify-between">
                   {faq.q}
-                  <span className="text-white/30 group-open:rotate-180 transition-transform duration-200" aria-hidden="true">
+                  <span className="text-white/50 group-open:rotate-180 transition-transform duration-200" aria-hidden="true">
                     ▾
                   </span>
                 </summary>

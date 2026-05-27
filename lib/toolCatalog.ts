@@ -11,15 +11,19 @@ export const TOOL_CATALOG: ToolCatalogEntry[] = [
     name: 'Cursor',
     plans: [
       { label: 'Hobby', pricePerSeat: 0, flat: true, flatPrice: 0 },
-      { label: 'Pro', pricePerSeat: 20, flat: false },
-      { label: 'Business', pricePerSeat: 40, flat: false },
-      { label: 'Enterprise', pricePerSeat: 60, flat: false },
+      { label: 'Individual (Pro)', pricePerSeat: 20, flat: false },
+      { label: 'Individual (Pro+)', pricePerSeat: 60, flat: false },
+      { label: 'Individual (Ultra)', pricePerSeat: 200, flat: false },
+      { label: 'Teams', pricePerSeat: 40, flat: false },
+      { label: 'Enterprise', pricePerSeat: 0, flat: true, flatPrice: 0 }, // Custom
     ],
   },
   {
     name: 'GitHub Copilot',
     plans: [
-      { label: 'Individual', pricePerSeat: 10, flat: false },
+      { label: 'Free', pricePerSeat: 0, flat: true, flatPrice: 0 },
+      { label: 'Individual (Pro)', pricePerSeat: 10, flat: false },
+      { label: 'Individual (Pro+)', pricePerSeat: 39, flat: false },
       { label: 'Business', pricePerSeat: 19, flat: false },
       { label: 'Enterprise', pricePerSeat: 39, flat: false },
     ],
@@ -30,46 +34,56 @@ export const TOOL_CATALOG: ToolCatalogEntry[] = [
       { label: 'Free', pricePerSeat: 0, flat: true, flatPrice: 0 },
       { label: 'Pro', pricePerSeat: null, flat: true, flatPrice: 20 },
       { label: 'Max', pricePerSeat: null, flat: true, flatPrice: 100 },
-      { label: 'Team', pricePerSeat: 30, flat: false },
-      { label: 'Enterprise', pricePerSeat: 60, flat: false },
-      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 }, // user-input
+      { label: 'Team (Standard)', pricePerSeat: 25, flat: false },
+      { label: 'Team (Premium)', pricePerSeat: 125, flat: false },
+      { label: 'Enterprise', pricePerSeat: 20, flat: false }, // Plus API
+      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 },
     ],
   },
   {
     name: 'ChatGPT',
     plans: [
+      { label: 'Free', pricePerSeat: 0, flat: true, flatPrice: 0 },
+      { label: 'Go', pricePerSeat: null, flat: true, flatPrice: 8 },
       { label: 'Plus', pricePerSeat: null, flat: true, flatPrice: 20 },
-      { label: 'Team', pricePerSeat: 30, flat: false },
-      { label: 'Enterprise', pricePerSeat: 60, flat: false },
-      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 }, // user-input
+      { label: 'Pro', pricePerSeat: null, flat: true, flatPrice: 100 },
+      { label: 'Pro (Full)', pricePerSeat: null, flat: true, flatPrice: 200 },
+      { label: 'Business', pricePerSeat: 30, flat: false },
+      { label: 'Enterprise', pricePerSeat: 0, flat: true, flatPrice: 0 }, // Custom
+      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 },
     ],
   },
   {
     name: 'Anthropic API Direct',
     plans: [
-      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 }, // user-input
+      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 },
     ],
   },
   {
     name: 'OpenAI API Direct',
     plans: [
-      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 }, // user-input
+      { label: 'API Direct', pricePerSeat: null, flat: true, flatPrice: 0 },
     ],
   },
   {
     name: 'Gemini',
     plans: [
-      { label: 'Pro', pricePerSeat: null, flat: true, flatPrice: 20 },
-      { label: 'Ultra', pricePerSeat: null, flat: true, flatPrice: 30 },
-      { label: 'API', pricePerSeat: null, flat: true, flatPrice: 0 }, // user-input
+      { label: 'Gemini Free', pricePerSeat: 0, flat: true, flatPrice: 0 },
+      { label: 'Google AI Plus', pricePerSeat: null, flat: true, flatPrice: 8 }, // ~$7.99
+      { label: 'Google AI Pro', pricePerSeat: null, flat: true, flatPrice: 20 }, // ~$19.99
+      { label: 'Google AI Ultra (Tier 1)', pricePerSeat: null, flat: true, flatPrice: 100 }, // ~$99.99
+      { label: 'Google AI Ultra (Tier 2)', pricePerSeat: null, flat: true, flatPrice: 200 }, // ~$199.99
+      { label: 'API', pricePerSeat: null, flat: true, flatPrice: 0 },
     ],
   },
   {
     name: 'Windsurf',
     plans: [
       { label: 'Free', pricePerSeat: 0, flat: true, flatPrice: 0 },
-      { label: 'Pro', pricePerSeat: 15, flat: false },
-      { label: 'Teams', pricePerSeat: 35, flat: false },
+      { label: 'Pro', pricePerSeat: 20, flat: false }, // User said $20/month, assume flat or per user. Let's make it per user based on Teams being per user.
+      { label: 'Max', pricePerSeat: 200, flat: false }, // Assume per user.
+      { label: 'Teams', pricePerSeat: 40, flat: false },
+      { label: 'Enterprise', pricePerSeat: 0, flat: true, flatPrice: 0 }, // Custom
     ],
   },
 ]

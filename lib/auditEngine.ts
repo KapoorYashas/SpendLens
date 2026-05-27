@@ -49,26 +49,26 @@ function checkSeatOverpayment(
   const p = plan.toLowerCase()
 
   // Claude Team ≤2 users → recommend Claude Pro (flat $20)
-  if (t === 'claude' && p === 'team' && seats <= 2) {
+  if (t === 'claude' && (p === 'team (standard)' || p === 'team (premium)') && seats <= 2) {
     const savings = monthlySpend - 20
     return makeAudit(
       tool, plan, monthlySpend,
       'downgrade',
-      `Downgrade to Claude Pro (flat $20/month). With only ${seats} user${seats > 1 ? 's' : ''}, the Team plan at $30/user/month is unnecessary.`,
+      `Downgrade to Claude Pro (flat $20/month). With only ${seats} user${seats > 1 ? 's' : ''}, the Team plan is unnecessary.`,
       savings > 0 ? savings : 0,
-      `Claude Team costs $30/user/month ($${monthlySpend}/month for ${seats} user${seats > 1 ? 's' : ''}). Claude Pro is a flat $20/month with equivalent capabilities for small teams of 1–2. Switching saves $${savings}/month ($${savings * 12}/year).`,
+      `Claude ${plan} costs at least $25/user/month ($${monthlySpend}/month for ${seats} user${seats > 1 ? 's' : ''}). Claude Pro is a flat $20/month with equivalent capabilities for small teams of 1–2. Switching saves $${savings}/month ($${savings * 12}/year).`,
     )
   }
 
-  // ChatGPT Team 1 user → recommend ChatGPT Plus (flat $20)
-  if ((t === 'chatgpt') && p === 'team' && seats === 1) {
+  // ChatGPT Business 1 user → recommend ChatGPT Plus (flat $20)
+  if ((t === 'chatgpt') && p === 'business' && seats === 1) {
     const savings = monthlySpend - 20
     return makeAudit(
       tool, plan, monthlySpend,
       'downgrade',
-      `Downgrade to ChatGPT Plus (flat $20/month). With 1 user, Team pricing at $30/user/month is unnecessary.`,
+      `Downgrade to ChatGPT Plus (flat $20/month). With 1 user, Business pricing at $30/user/month is unnecessary.`,
       savings > 0 ? savings : 0,
-      `ChatGPT Team costs $30/user/month ($${monthlySpend}/month for 1 user). ChatGPT Plus is a flat $20/month for individual users with the same model access. Switching saves $${savings}/month ($${savings * 12}/year).`,
+      `ChatGPT Business costs $30/user/month ($${monthlySpend}/month for 1 user). ChatGPT Plus is a flat $20/month for individual users with the same model access. Switching saves $${savings}/month ($${savings * 12}/year).`,
     )
   }
 
@@ -78,32 +78,32 @@ function checkSeatOverpayment(
     return makeAudit(
       tool, plan, monthlySpend,
       'downgrade',
-      `Downgrade to GitHub Copilot Individual ($10/user/month). With only ${seats} user${seats > 1 ? 's' : ''}, Individual licenses save $9/user/month.`,
+      `Downgrade to GitHub Copilot Individual (Pro) ($10/user/month). With only ${seats} user${seats > 1 ? 's' : ''}, Individual licenses save $9/user/month.`,
       savings,
-      `GitHub Copilot Business costs $19/user/month ($${monthlySpend}/month for ${seats} user${seats > 1 ? 's' : ''}). The Individual plan at $10/user/month covers the same code completions for teams under 3. Savings: $9/user × ${seats} user${seats > 1 ? 's' : ''} = $${savings}/month ($${savings * 12}/year).`,
+      `GitHub Copilot Business costs $19/user/month ($${monthlySpend}/month for ${seats} user${seats > 1 ? 's' : ''}). The Individual (Pro) plan at $10/user/month covers the same code completions for teams under 3. Savings: $9/user × ${seats} user${seats > 1 ? 's' : ''} = $${savings}/month ($${savings * 12}/year).`,
     )
   }
 
-  // Cursor Business 1 user → recommend Cursor Pro ($20)
-  if (t === 'cursor' && p === 'business' && seats === 1) {
-    const savings = 40 - 20 // Business $40 vs Pro $20
+  // Cursor Teams 1 user → recommend Cursor Pro ($20)
+  if (t === 'cursor' && p === 'teams' && seats === 1) {
+    const savings = 40 - 20 // Teams $40 vs Pro $20
     return makeAudit(
       tool, plan, monthlySpend,
       'downgrade',
-      `Downgrade to Cursor Pro ($20/month). With 1 user, Business pricing at $40/user/month is unnecessary.`,
+      `Downgrade to Cursor Individual (Pro) ($20/month). With 1 user, Teams pricing at $40/user/month is unnecessary.`,
       savings,
-      `Cursor Business costs $40/user/month ($${monthlySpend}/month for 1 user). Cursor Pro at $20/month provides the same AI code completions and chat for individual developers. Switching saves $${savings}/month ($${savings * 12}/year).`,
+      `Cursor Teams costs $40/user/month ($${monthlySpend}/month for 1 user). Cursor Individual (Pro) at $20/month provides the same AI code completions and chat for individual developers. Switching saves $${savings}/month ($${savings * 12}/year).`,
     )
   }
 
-  // Cursor Business 2 users → same cost as two Pro licenses, flag as optimal
-  if (t === 'cursor' && p === 'business' && seats === 2) {
+  // Cursor Teams 2 users → same cost as two Pro licenses, flag as optimal
+  if (t === 'cursor' && p === 'teams' && seats === 2) {
     return makeAudit(
       tool, plan, monthlySpend,
       'optimal',
-      `Your current plan is cost-equivalent to two Pro licenses. No change needed.`,
+      `Your current plan is cost-equivalent to two Individual (Pro) licenses. No change needed.`,
       0,
-      `Cursor Business at $40/user/month for 2 users = $80/month. Two Cursor Pro licenses = 2 × $20 = $80/month. Cost is identical — stay on Business for the collaboration features, or switch to two Pro licenses for identical savings ($0 difference).`,
+      `Cursor Teams at $40/user/month for 2 users = $80/month. Two Cursor Individual (Pro) licenses = 2 × $20 = $80/month. Cost is identical — stay on Teams for the collaboration features, or switch to two Pro licenses for identical savings ($0 difference).`,
     )
   }
 
@@ -125,7 +125,7 @@ function checkCrossToolRedundancy(
 
   const cursorIdx = updated.findIndex(a =>
     a.tool.toLowerCase() === 'cursor' &&
-    (a.plan.toLowerCase() === 'pro' || a.plan.toLowerCase() === 'business')
+    (a.plan.toLowerCase() === 'individual (pro)' || a.plan.toLowerCase() === 'teams' || a.plan.toLowerCase() === 'pro')
   )
   const copilotIdx = updated.findIndex(a =>
     a.tool.toLowerCase() === 'github copilot'

@@ -274,7 +274,7 @@ export default function AuditResultsClient({ audit, auditId }: Props) {
               ${audit.total_annual_savings.toLocaleString()}/year
             </p>
           )}
-          <div className="flex items-center justify-center gap-4 mt-4 text-sm text-white/30">
+          <div className="flex items-center justify-center gap-4 mt-4 text-sm text-white/50">
             <span>{audit.team_size} people</span>
             <span aria-hidden="true">·</span>
             <span>{audit.use_case} use case</span>
@@ -389,7 +389,7 @@ export default function AuditResultsClient({ audit, auditId }: Props) {
                         </span>
                       )}
                     </div>
-                    <span className="text-white/30 group-open:rotate-180 transition-transform duration-200 ml-4" aria-hidden="true">▾</span>
+                    <span className="text-white/50 group-open:rotate-180 transition-transform duration-200 ml-4" aria-hidden="true">▾</span>
                   </summary>
                   <div className="mt-4 space-y-3 text-sm">
                     <div>
@@ -462,7 +462,7 @@ export default function AuditResultsClient({ audit, auditId }: Props) {
               Credex
             </a>
           </p>
-          <Link href="/" className="text-white/30 hover:text-white/50 transition-colors mt-3 inline-block">
+          <Link href="/" className="text-white/50 hover:text-white/50 transition-colors mt-3 inline-block">
             ← Audit another team
           </Link>
         </footer>
